@@ -1,0 +1,5 @@
+click
+pyphony
+numpy
+audiomate
+git+https://github.com/sequitur-g2p/sequitur-g2p@master
