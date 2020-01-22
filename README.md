@@ -8,9 +8,16 @@ First, we have to get the data, a language model and the lexicon.
  * Download the lexicon from [https://github.com/ynop/german-asr-lexicon](https://github.com/ynop/german-asr-lexicon).
 
 ## Preparation
-Before training, preparation of data, lexicon and lm has to be done by executing the scripts ``prepare.sh``.
-Change paths of data, LM and lexicon in the scripts to the path where you have prepared it in the previous step.
+Before training, preparation of data, lexicon and lm has to be done by executing the script ``prepare.sh``.
 In order to do that some python dependencies have to be installed with ``pip install -r requirements``.
+
+```
+./prepare.sh \
+    [german-asr-data]/data/full_waverized \
+    [lexicon] \
+    [sequitur-model] \
+    [lm]
+```
 
 ## Training
 After preparation, the actual training is done.

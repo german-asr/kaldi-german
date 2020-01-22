@@ -43,7 +43,7 @@ if [ $stage -le 2 ]; then
 fi
 
 if [ $stage -le 3 ]; then
-  for part in train dev test train_cv dev_cv test_cv dev_tuda test_tuda; do
+  for part in train dev test train_cv; do
     utils/utt2spk_to_spk2utt.pl data/$part/utt2spk > data/$part/spk2utt
 
     steps/make_mfcc.sh --cmd "$train_cmd" --nj 8 data/$part exp/make_mfcc/$part exp/mfcc/$part
@@ -74,7 +74,7 @@ if [ $stage -le 8 ]; then
     fi
 
     if $decode; then
-        for test in test_cv dev_cv test_tuda dev_tuda; do
+        for test in test dev; do
           steps/decode.sh --nj 8 --cmd "$decode_cmd" exp/mono/graph_nosp_ng6 \
                           data/$test exp/mono/decode_nosp_ng6_$test
         done
@@ -95,7 +95,7 @@ if [ $stage -le 9 ]; then
     fi
 
     if $decode; then
-        for test in test_cv dev_cv test_tuda dev_tuda; do
+        for test in test dev; do
           steps/decode.sh --nj 8 --cmd "$decode_cmd" exp/tri1/graph_nosp_ng6 \
                           data/$test exp/tri1/decode_nosp_ng6_$test
         done
@@ -117,7 +117,7 @@ if [ $stage -le 10 ]; then
     fi
 
     if $decode; then
-        for test in test_cv dev_cv test_tuda dev_tuda; do
+        for test in test dev; do
           steps/decode.sh --nj 8 --cmd "$decode_cmd" exp/tri2b/graph_nosp_ng6 \
                           data/$test exp/tri2b/decode_nosp_ng6_$test
         done
@@ -139,7 +139,7 @@ if [ $stage -le 11 ]; then
     fi
 
     if $decode; then
-        for test in test_cv dev_cv test_tuda dev_tuda; do
+        for test in test dev; do
           steps/decode_fmllr.sh --nj 8 --cmd "$decode_cmd" \
                                 exp/tri3b/graph_nosp_ng6 data/$test \
                                 exp/tri3b/decode_nosp_ng6_$test
@@ -164,7 +164,7 @@ if [ $stage -le 12 ]; then
     fi
 
     if $decode; then
-        for test in test_cv dev_cv test_tuda dev_tuda; do
+        for test in test dev; do
           steps/decode_fmllr.sh --nj 8 --cmd "$decode_cmd" \
                                 exp/tri4b/graph_nosp_ng6 data/$test \
                                 exp/tri4b/decode_nosp_ng6_$test
@@ -213,7 +213,7 @@ if [ $stage -le 13 ]; then
     fi
 
     if $decode; then
-        for test in test_cv dev_cv test_tuda dev_tuda; do
+        for test in test dev; do
           steps/decode_fmllr.sh --nj 8 --cmd "$decode_cmd" \
                                 exp/tri4b/graph_ng6 data/$test \
                                 exp/tri4b/decode_ng6_$test
@@ -223,13 +223,13 @@ fi
 
 if [ $stage -le 20 ]; then
     # train and test nnet3 tdnn models on the entire data with data-cleaning.
-    local/chain/run_tdnn.sh --stage 30 # set "--stage 11" if you have already run local/nnet3/run_tdnn.sh
+    local/chain/run_tdnn.sh --stage 1 # set "--stage 11" if you have already run local/nnet3/run_tdnn.sh
 fi
 
 if [ $stage -le 21 ]; then
     for dir in exp/* exp/chain*/*; do
       # steps/info/gmm_dir_info.pl $dir
-        for x in $dir/decode*_cv* $dir/decode*_tuda*; do
+        for x in $dir/decode* $dir/decode*; do
             [ -d $x ] && grep WER $x/wer_* | utils/best_wer.sh;
         done
     done | sort -n -r -k2 > RESULTS

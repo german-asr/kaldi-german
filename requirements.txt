@@ -1,5 +1,5 @@
 click
 pyphony
 numpy
-audiomate
+audiomate==5.1.0
 git+https://github.com/sequitur-g2p/sequitur-g2p@master

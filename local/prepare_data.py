@@ -47,30 +47,6 @@ def run(corpus_path, out_path):
     os.makedirs(train_cv_path, exist_ok=True)
     kaldi_writer.save(train_cv, train_cv_path)
 
-    print(' - Save Test Common Voice')
-    test_cv = audiomate.Corpus.from_corpus(corpus.subviews['test_common_voice'])
-    test_cv_path = os.path.join(out_path, 'test_cv')
-    os.makedirs(test_cv_path, exist_ok=True)
-    kaldi_writer.save(test_cv, test_cv_path)
-
-    print(' - Save Dev Common Voice')
-    dev_cv = audiomate.Corpus.from_corpus(corpus.subviews['dev_common_voice'])
-    dev_cv_path = os.path.join(out_path, 'dev_cv')
-    os.makedirs(dev_cv_path, exist_ok=True)
-    kaldi_writer.save(dev_cv, dev_cv_path)
-
-    print(' - Save Test Tuda')
-    test_tuda = audiomate.Corpus.from_corpus(corpus.subviews['test_tuda'])
-    test_tuda_path = os.path.join(out_path, 'test_tuda')
-    os.makedirs(test_tuda_path, exist_ok=True)
-    kaldi_writer.save(test_tuda, test_tuda_path)
-
-    print(' - Save Dev Tuda')
-    dev_tuda = audiomate.Corpus.from_corpus(corpus.subviews['dev_tuda'])
-    dev_tuda_path = os.path.join(out_path, 'dev_tuda')
-    os.makedirs(dev_tuda_path, exist_ok=True)
-    kaldi_writer.save(dev_tuda, dev_tuda_path)
-
 
 if __name__ == '__main__':
     run()
