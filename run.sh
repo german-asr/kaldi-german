@@ -65,7 +65,7 @@ fi
 
 if [ $stage -le 8 ]; then
     if $train; then
-        train a monophone system
+        # train a monophone system
         steps/train_mono.sh --boost-silence 1.25 --nj 8 --cmd "$train_cmd" \
                            data/train_2kshort data/lang_nosp exp/mono
 

@@ -23,5 +23,5 @@ fi
 # Import/Prepare LM
 if [ ! -d data/local/lm ]; then
     mkdir -p data/local/lm
-    cp $LM_PATH
+    cp $LM_PATH data/local/lm/lm_6.arpa
 fi
