@@ -223,7 +223,7 @@ fi
 
 if [ $stage -le 20 ]; then
     # train and test nnet3 tdnn models on the entire data with data-cleaning.
-    local/chain/run_tdnn.sh --stage 1 # set "--stage 11" if you have already run local/nnet3/run_tdnn.sh
+    local/chain/run_tdnn.sh --stage 15 # set "--stage 11" if you have already run local/nnet3/run_tdnn.sh
 fi
 
 if [ $stage -le 21 ]; then
