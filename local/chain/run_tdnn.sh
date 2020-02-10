@@ -180,7 +180,7 @@ if [ ! -z $decode_iter ]; then
 fi
 if [ $stage -le 17 ]; then
   rm $dir/.error 2>/dev/null || true
-  for decode_set in dev_cv test_cv dev_tuda test_tuda; do
+  for decode_set in dev test; do
       steps/nnet3/decode.sh --acwt 1.0 --post-decode-acwt 10.0 \
           --nj $decode_nj --cmd "$decode_cmd" $iter_opts \
           --online-ivector-dir exp/nnet3${nnet3_affix}/ivectors_${decode_set}_hires \

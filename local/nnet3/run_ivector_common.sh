@@ -64,7 +64,7 @@ if [ $stage -le 3 ]; then
   echo "$0: creating high-resolution MFCC features"
   mfccdir=data/${train_set}_sp_hires/data
 
-  for datadir in ${train_set}_sp test dev test_cv dev_cv test_tuda dev_tuda; do
+  for datadir in ${train_set}_sp test dev; do
     utils/copy_data_dir.sh data/$datadir data/${datadir}_hires
   done
 
@@ -72,7 +72,7 @@ if [ $stage -le 3 ]; then
   # features; this helps make trained nnets more invariant to test data volume.
   utils/data/perturb_data_dir_volume.sh data/${train_set}_sp_hires
 
-  for datadir in ${train_set}_sp test dev test_cv dev_cv test_tuda dev_tuda; do
+  for datadir in ${train_set}_sp test dev; do
     steps/make_mfcc.sh --nj 70 --mfcc-config conf/mfcc_hires.conf \
       --cmd "$train_cmd" data/${datadir}_hires || exit 1;
     steps/compute_cmvn_stats.sh data/${datadir}_hires || exit 1;
@@ -143,7 +143,7 @@ fi
 
 if [ $stage -le 7 ]; then
   echo "$0: extracting iVectors for dev and test data"
-  for data in test dev test_tuda dev_tuda test_cv dev_cv; do
+  for data in test dev; do
     steps/online/nnet2/extract_ivectors_online.sh --cmd "$train_cmd" --nj 10 \
       data/${data}_hires exp/nnet3${nnet3_affix}/extractor \
       exp/nnet3${nnet3_affix}/ivectors_${data}_hires || exit 1;
