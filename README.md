@@ -27,9 +27,16 @@ All commands are in ``run.sh``.
 This script is derived from the LibriSpeech recipe at ``egs/librispeech``.
 
 ## Results
+Word error rates in %, for [megs](https://github.com/german-asr/megs) v2.
 
-### Word error rate (%)
+| Model | Training-Data | dev | test |
+| ----- | ------------- | ------ | ------- |
+| tdnn-chain | train | 14.12 | 15.42 |
 
 | Model | Training-Data | dev_cv | test_cv | dev_tuda | test_tuda |
 | ----- | ------------- | ------ | ------- | -------- | --------- |
-| tdnn-chain | train | 15.26 | 18.53 | 11.94 | 12.66 |
+| tdnn-chain | train | 14.71 | 18.45 | 11.85 | 12.80 |
+
+| Model | Training-Data | dev_swc | test_swc | dev_voxforge | test_voxforge |
+| ----- | ------------- | ------ | ------- | -------- | --------- |
+| tdnn-chain | train | 18.74 | 17.45 | 7.78 | 8.25 |
